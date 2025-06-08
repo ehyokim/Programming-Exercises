@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 struct nlist { 
     struct nlist *next;
     char *name;
@@ -15,7 +16,7 @@ int undef(char *name);
 void printtable();
 void testundef();
 
-#define HASHSIZE 3
+#define HASHSIZE 10
 static struct nlist *hashtab[HASHSIZE]; /* pointer table */
 
 int main()
