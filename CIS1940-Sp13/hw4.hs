@@ -58,3 +58,5 @@ map' f = foldr (\x s -> f x : s) []
 
 myFoldl :: (a -> b -> a) -> a -> [b] -> a
 myFoldl f base xs = foldr (flip f) base (reverse xs)
+
+-- Ex 4
