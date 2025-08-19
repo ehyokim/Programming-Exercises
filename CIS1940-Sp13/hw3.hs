@@ -26,3 +26,17 @@ greaterThanRight list
     | length list < 2 = []
     | otherwise = let (x:y:xs) = list in 
                       (x > y) : greaterThanRight (y:xs)
+
+histogram :: [Integer] -> String 
+histogram ints = let freqchart = [[ if row > colfreq then ' ' else '*'  
+                                    | col <- [0..9], let colfreq = freqlst !! col] 
+                                    | row <- [maxFreq, maxFreq-1..1]] in 
+                    unlines freqchart ++ "==========\n0123456789\n"
+    where freqlst = countFreq ints
+          maxFreq = maximum freqlst 
+
+countFreq :: [Integer] -> [Integer]
+countFreq = foldr (countInt 0) (replicate 10 0)
+    where countInt idx i (x:xs)
+            | i == idx = (x + 1) : xs
+            | otherwise = x : countInt (idx+1) i xs 
