@@ -30,7 +30,8 @@ greaterThanRight list
 histogram :: [Integer] -> String 
 histogram ints = let freqchart = [[ if row > colfreq then ' ' else '*'  
                                     | col <- [0..9], let colfreq = freqlst !! col] 
-                                    | row <- [maxFreq, maxFreq-1..1]] in 
+                                    | row <- [maxFreq, maxFreq-1..1]] 
+                 in 
                     unlines freqchart ++ "==========\n0123456789\n"
     where freqlst = countFreq ints
           maxFreq = maximum freqlst 

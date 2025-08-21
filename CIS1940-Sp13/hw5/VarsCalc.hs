@@ -44,3 +44,5 @@ withVars :: [(String, Integer)]
     -> (M.Map String Integer -> Maybe Integer)
     -> Maybe Integer
 withVars vs exp = exp $ M.fromList vs
+-- Note that simply applying the map object here works as by the instance declaration above, 
+-- the (mul, add, lit) methods of class Expr will all output maps of type VarQuery
