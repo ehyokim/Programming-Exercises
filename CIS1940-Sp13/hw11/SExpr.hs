@@ -50,7 +50,7 @@ data SExpr = A Atom
   deriving Show
 
 parseSExpr :: Parser SExpr
-parseSExpr = parseNextAtom <|> parseListSExpr
+parseSExpr = parseNextAtom <|> parseNextOpenPara
 
 -- mutually recursive. 
 parseNextOpenPara :: Parser SExpr
@@ -69,4 +69,4 @@ parseNextAtom :: Parser SExpr
 parseNextAtom = A <$> (parseNextInt <|> parseNextIdent) 
 
 parseListSExpr :: Parser SExpr 
-parseListSExpr = Comb <$> (zeroOrMore (parseNextAtom <|> parseNextOpenPara) <* parseNextClosePara)
+parseListSExpr = Comb <$> zeroOrMore (parseNextAtom <|> parseNextOpenPara) <* parseNextClosePara
