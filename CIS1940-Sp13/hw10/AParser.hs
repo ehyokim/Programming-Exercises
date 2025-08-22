@@ -67,12 +67,10 @@ first f (first, second) = (f first, second)
 
 -- Ex 2 
 instance Applicative Parser where 
-  pure input = Parser $ const $ Just (input, "")
+  pure input = Parser $ \str -> Just (input, str)
   -- Is there a better way of doing this?
   p1 <*> p2 = Parser $ \str -> case runParser p1 str of
-                                  Just (func, remain) -> case runParser p2 remain of
-                                                  Just (val , leftover) -> Just (func val, leftover)
-                                                  _ -> Nothing
+                                  Just (func, remain) -> first func <$> runParser p2 remain
                                   _ -> Nothing
 
 -- Ex 3 
